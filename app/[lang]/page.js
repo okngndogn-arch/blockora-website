@@ -34,7 +34,7 @@ export default async function Home({ params }) {
             </dl>
           </div>
           <figure className="hero-shot">
-            <img src={asset(`/shots/${c.shots[1].img}.webp`)} alt={c.shots[1].alt} width="480" height="800" />
+            <img src={asset('/shots/multi-hook.webp')} alt={c.heroAlt} width="432" height="768" />
           </figure>
         </section>
 
@@ -43,7 +43,7 @@ export default async function Home({ params }) {
           <ol className="shots">
             {c.shots.map((s) => (
               <li key={s.img} className="shot">
-                <img src={asset(`/shots/${s.img}.webp`)} alt={s.alt} width="480" height="800" loading="lazy" />
+                <img src={asset(`/shots/${s.img}.webp`)} alt={s.alt} width="432" height="768" loading="lazy" />
                 <h3>{s.title}</h3>
                 <p>{s.text}</p>
               </li>
