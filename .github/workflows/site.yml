@@ -1,0 +1,94 @@
+# Siteyi derler, GitHub Pages'e yayinlar ve surum yayini (release) olusturur.
+# - Pull request: yalnizca icerik kontrolu + derleme (yayin yok)
+# - main'e push: derle -> Pages'e yayinla -> package.json surumu icin etiket yoksa vX.Y.Z release olustur
+name: Site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Icerik kontrolu (TR/EN esitligi, yazim kurallari)
+        run: npm run check
+      - name: Pages adresini al
+        id: pages
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@v5
+      - name: Derle
+        env:
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          SITE_URL: ${{ steps.pages.outputs.base_url }}
+        run: |
+          npm run build
+          touch out/.nojekyll
+      - name: Pages paketi
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+      - name: Release paketi
+        if: github.event_name != 'pull_request'
+        run: cd out && zip -qr ../blockora-website.zip .
+      - if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-zip
+          path: blockora-website.zip
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  release:
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-zip
+      - name: Surum etiketi ve release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="v$(node -p "require('./package.json').version")"
+          if git rev-parse -q --verify "refs/tags/$VERSION" >/dev/null; then
+            echo "$VERSION zaten var; yeni release icin package.json surumunu artirin."
+            exit 0
+          fi
+          gh release create "$VERSION" blockora-website.zip \
+            --target "$GITHUB_SHA" \
+            --title "BLOCKORA web sitesi $VERSION" \
+            --generate-notes

@@ -1,0 +1,139 @@
+/* BLOCKORA renkleri oyundan (marketing/BLOCKORA-tanitim-paketi.md, "Marka dili") */
+:root {
+  --bg-top: #23265a;
+  --bg: #0e0f26;
+  --surface: #1a1c44;
+  --surface-2: #232657;
+  --line: rgba(185, 168, 255, 0.18);
+  --text: #f3f1ff;
+  --muted: #b8b4dc;
+  --purple: #9b6bff;
+  --glow: #6f5cff;
+  --gold: #ffd23f;
+  --green: #3ddc84;
+  --radius: 18px;
+  --wrap: 1080px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Nunito', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  background-image:
+    radial-gradient(900px 500px at 85% -10%, rgba(111, 92, 255, 0.28), transparent 60%),
+    linear-gradient(180deg, var(--bg-top) 0, var(--bg) 720px);
+  background-repeat: no-repeat;
+}
+
+a { color: inherit; }
+a:focus-visible, summary:focus-visible, .btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 8px; }
+img { max-width: 100%; height: auto; display: block; }
+h1, h2, h3 { line-height: 1.15; font-weight: 900; letter-spacing: -0.01em; }
+
+.wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 16px; }
+@media (min-width: 720px) { .wrap { padding: 0 28px; } }
+
+.skip { position: absolute; left: -999px; top: 8px; background: var(--gold); color: #1a1300; padding: 8px 14px; border-radius: 10px; font-weight: 700; z-index: 10; }
+.skip:focus { left: 16px; }
+
+/* Ust bar */
+.site-header { position: sticky; top: 0; z-index: 5; backdrop-filter: blur(10px); background: rgba(14, 15, 38, 0.72); border-bottom: 1px solid var(--line); }
+.header-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 64px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 900; font-size: 20px; letter-spacing: 0.04em; }
+.nav { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.nav a { text-decoration: none; color: var(--muted); font-weight: 700; padding: 10px 12px; border-radius: 10px; min-height: 44px; display: inline-flex; align-items: center; }
+.nav a:hover { color: var(--text); background: var(--surface); }
+.nav a[aria-current='page'] { color: var(--text); }
+.nav .lang-switch { border: 1px solid var(--line); color: var(--text); margin-left: 6px; }
+
+/* Ana sayfa */
+.hero { display: grid; gap: 32px; padding-top: 48px; padding-bottom: 56px; align-items: center; }
+@media (min-width: 880px) { .hero { grid-template-columns: 1.15fr 0.85fr; padding-top: 72px; padding-bottom: 88px; } }
+.eyebrow { color: var(--gold); font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; font-size: 14px; margin: 0 0 12px; }
+.hero h1 { font-size: clamp(36px, 7vw, 62px); margin: 0 0 18px; }
+.lead { font-size: 19px; color: var(--muted); max-width: 40em; margin: 0 0 28px; }
+.hero-shot { margin: 0; justify-self: center; max-width: 340px; }
+.hero-shot img, .shot img { border-radius: 26px; border: 2px solid rgba(155, 107, 255, 0.55); box-shadow: 0 30px 80px -30px rgba(111, 92, 255, 0.7); }
+
+.store-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.store-btn { display: inline-flex; align-items: center; gap: 12px; min-height: 56px; padding: 10px 20px 10px 16px; border-radius: 14px; background: #fff; color: #0e0f26; text-decoration: none; }
+.store-btn small { display: block; font-size: 12px; font-weight: 700; line-height: 1.2; }
+.store-btn strong { display: block; font-size: 18px; font-weight: 900; line-height: 1.2; }
+a.store-btn:hover { background: var(--gold); }
+.store-btn.is-soon { background: var(--surface); color: var(--text); border: 1px dashed rgba(185, 168, 255, 0.45); }
+.store-btn.is-soon small { color: var(--gold); }
+
+.facts { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 32px 0 0; padding: 0; }
+.facts div { min-width: 120px; }
+.facts dt { font-size: 13px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+.facts dd { margin: 2px 0 0; font-weight: 900; }
+
+.showcase { padding-bottom: 72px; }
+.showcase h2, .closing h2 { font-size: clamp(28px, 4.5vw, 40px); margin: 0 0 28px; }
+.shots { list-style: none; margin: 0; padding: 0; display: grid; gap: 40px 28px; grid-template-columns: 1fr; }
+@media (min-width: 620px) { .shots { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 960px) { .shots { grid-template-columns: repeat(3, 1fr); } }
+.shot img { width: 100%; max-width: 320px; margin: 0 auto 18px; }
+.shot h3 { font-size: 22px; margin: 0 0 6px; }
+.shot p { margin: 0; color: var(--muted); }
+
+.closing { text-align: center; padding: 56px 16px 88px; border-top: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; }
+.closing svg { margin-bottom: 20px; }
+.closing h2 { margin-bottom: 10px; }
+.closing p { color: var(--muted); max-width: 34em; margin: 0 0 28px; }
+
+/* Metin sayfalari */
+.doc { max-width: 760px; padding-top: 48px; padding-bottom: 80px; }
+.doc h1 { font-size: clamp(34px, 6vw, 48px); margin: 0 0 10px; }
+.doc h2 { font-size: 24px; margin: 44px 0 10px; scroll-margin-top: 84px; }
+.doc section h2 { margin-top: 40px; }
+.doc h3 { font-size: 19px; margin: 30px 0 8px; color: var(--gold); }
+.doc p, .doc li { color: #dcd9f5; }
+.doc ul { padding-left: 22px; }
+.doc li { margin: 8px 0; }
+.doc a { color: #c9b6ff; text-underline-offset: 3px; }
+.doc a:hover { color: var(--gold); }
+.meta { color: var(--muted); font-size: 15px; margin: 0 0 24px; }
+.toc { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 20px; margin: 8px 0 8px; }
+.toc ol { margin: 0; padding-left: 22px; columns: 2 220px; column-gap: 28px; }
+.toc li { margin: 4px 0; break-inside: avoid; }
+.toc a { text-decoration: none; }
+
+.contact-card { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; margin: 8px 0 12px; }
+.contact-card h2 { margin: 0 0 4px; }
+.contact-card p { margin: 0; }
+.contact-card .mail { font-weight: 700; color: var(--text); margin-top: 6px; word-break: break-all; }
+.btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border-radius: 14px; background: var(--green); color: #062313; font-weight: 900; text-decoration: none; }
+.doc a.btn { color: #062313; }
+.doc a.btn:hover { background: var(--gold); color: #1a1300; }
+
+details { border: 1px solid var(--line); background: rgba(26, 28, 68, 0.6); border-radius: 14px; margin: 10px 0; }
+summary { cursor: pointer; font-weight: 700; padding: 14px 44px 14px 18px; min-height: 48px; list-style: none; position: relative; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: '+'; position: absolute; right: 18px; top: 50%; transform: translateY(-50%); font-weight: 900; font-size: 22px; color: var(--purple); }
+details[open] summary::after { content: '−'; }
+details p { margin: 0; padding: 0 18px 16px; }
+
+/* Alt bilgi */
+.site-footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+.footer-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-top: 24px; padding-bottom: 32px; }
+.footer-row p { margin: 0; }
+.footer-nav { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.footer-nav a { color: var(--muted); text-underline-offset: 3px; }
+.footer-nav a:hover { color: var(--text); }
+
+/* Dil secimi (kok sayfa) */
+.chooser { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 16px; text-align: center; }
+.chooser h1 { font-size: 44px; margin: 16px 0; letter-spacing: 0.04em; }
+.chooser p { display: flex; gap: 12px; }
+.chooser a { min-width: 140px; min-height: 52px; display: inline-flex; align-items: center; justify-content: center; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); font-weight: 900; text-decoration: none; }
+.chooser a:hover { border-color: var(--gold); }
